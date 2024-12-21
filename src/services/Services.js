@@ -25,6 +25,14 @@ class Services {
 
     return listaRegistrosAtualizados[0] > 0;
   }
+
+  async excluirRegistro(id) {
+    const registrosExcluidos = await dataSource[this.nomeModelo].destroy({
+      where: { id: id },
+    });
+
+    return registrosExcluidos > 0;
+  }
 }
 
 module.exports = Services;

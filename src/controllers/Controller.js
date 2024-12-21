@@ -52,11 +52,32 @@ class Controllers {
       if (!foiAtualizado) {
         return res
           .status(400)
-          .json({ message: 'Não foi possível atualizar o registro' });
+          .json({ message: 'Não foi possível atualizar o registro!' });
       }
       return res
         .status(200)
         .json({ message: 'Registro atualizado com sucesso!' });
+    } catch (error) {
+      // erro
+    }
+  }
+
+  async excluirRegistro(req, res) {
+    try {
+      const { id } = req.params;
+
+      const foiExcluido = await this.entidadeService.excluirRegistro(
+        Number(id)
+      );
+
+      if (!foiExcluido) {
+        return res
+          .status(400)
+          .json({ message: 'Não foi possível excluir o registro!' });
+      }
+      return res
+        .status(200)
+        .json({ message: 'Registro excluído com sucesso!' });
     } catch (error) {
       // erro
     }

@@ -12,5 +12,8 @@ router.get('/pessoas/:id', (req, res) =>
 router.put('/pessoas/:id', (req, res) =>
   pessoaController.atualizarRegistro(req, res)
 );
+router.delete('/pessoas/:id', (req, res) =>
+  pessoaController.excluirRegistro(req, res)
+);
 
 module.exports = router;
