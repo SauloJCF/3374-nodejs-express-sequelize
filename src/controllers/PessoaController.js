@@ -1,12 +1,10 @@
-const database = require('../models');
-class PessoaController {
-  static async pegarTodos(req, res) {
-    try {
-      const pessoas = await database.Pessoa.findAll();
-      console.log('Aqui');
+const Controller = require('./Controller.js');
+const PessoaServices = require('../services/PessoaServices.js');
 
-      return res.status(200).json(pessoas);
-    } catch (error) {}
+const pessoaServices = new PessoaServices();
+class PessoaController extends Controller {
+  constructor() {
+    super(pessoaServices);
   }
 }
 
