@@ -3,6 +3,17 @@ class Controllers {
     this.entidadeService = entidadeService;
   }
 
+  async criarRegistro(req, res) {
+    try {
+      const registro = req.body;
+      const registroCriado = await this.entidadeService.criarRegistro(registro);
+
+      return await res.status(200).json(registroCriado);
+    } catch (error) {
+      // erro
+    }
+  }
+
   async pegarTodos(req, res) {
     try {
       const listaRegistros = await this.entidadeService.pegarTodos();

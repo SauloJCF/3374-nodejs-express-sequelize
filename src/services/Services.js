@@ -5,6 +5,10 @@ class Services {
     this.nomeModelo = nomeModelo;
   }
 
+  async criarRegistro(registro) {
+    return await dataSource[this.nomeModelo].create(registro);
+  }
+
   async pegarTodos() {
     return await dataSource[this.nomeModelo].findAll();
   }
