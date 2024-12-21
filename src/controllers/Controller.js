@@ -8,8 +8,23 @@ class Controllers {
       const registro = req.body;
       const registroCriado = await this.entidadeService.criarRegistro(registro);
 
-      return await res.status(200).json(registroCriado);
+      return res.status(200).json(registroCriado);
     } catch (error) {
+      // erro
+    }
+  }
+
+  async pegarPeloId(req, res) {
+    try {
+      const { id } = req.params;
+      const registro = await this.entidadeService.pegarPeloId(id);
+
+      if (!registro) {
+        return res.status(400).json({ message: 'Registro não encontrado!' });
+      }
+
+      return res.status(200).json(registro);
+    } catch (erro) {
       // erro
     }
   }

@@ -9,6 +9,10 @@ class Services {
     return await dataSource[this.nomeModelo].create(registro);
   }
 
+  async pegarPeloId(id) {
+    return await dataSource[this.nomeModelo].findByPk(id);
+  }
+
   async pegarTodos() {
     return await dataSource[this.nomeModelo].findAll();
   }
