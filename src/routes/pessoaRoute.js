@@ -18,7 +18,7 @@ router.delete('/pessoas/:id', (req, res) =>
   pessoaController.excluirRegistro(req, res)
 );
 router.get('/pessoas/:estudanteId/matriculas', (req, res) =>
-  matriculaController.pegarPorEstudante(req, res)
+  pessoaController.pegarMatriculas(req, res)
 );
 router.post('/pessoas/:estudanteId/matriculas', (req, res) =>
   matriculaController.criarRegistro(req, res)
