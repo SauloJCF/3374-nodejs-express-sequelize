@@ -20,7 +20,7 @@ class MatriculaController extends Controller {
 
       return res.status(200).json(registros);
     } catch (error) {
-      // erro
+      return res.status(500).body({ erro: error.message });
     }
   }
 }

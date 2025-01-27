@@ -10,7 +10,7 @@ class Controllers {
 
       return res.status(200).json(registroCriado);
     } catch (error) {
-      // erro
+      return res.status(500).body({ erro: error.message });
     }
   }
 
@@ -20,12 +20,12 @@ class Controllers {
       const registro = await this.entidadeService.pegarPeloId(id);
 
       if (!registro) {
-        return res.status(400).json({ message: 'Registro não encontrado!' });
+        return res.status(400).json({ message: "Registro não encontrado!" });
       }
 
       return res.status(200).json(registro);
-    } catch (erro) {
-      // erro
+    } catch (error) {
+      return res.status(500).body({ error: error.message });
     }
   }
 
@@ -35,7 +35,7 @@ class Controllers {
 
       return res.status(200).json(listaRegistros);
     } catch (error) {
-      // erro
+      return res.status(500).body({ erro: error.message });
     }
   }
 
@@ -52,13 +52,13 @@ class Controllers {
       if (!foiAtualizado) {
         return res
           .status(400)
-          .json({ message: 'Não foi possível atualizar o registro!' });
+          .json({ message: "Não foi possível atualizar o registro!" });
       }
       return res
         .status(200)
-        .json({ message: 'Registro atualizado com sucesso!' });
+        .json({ message: "Registro atualizado com sucesso!" });
     } catch (error) {
-      // erro
+      return res.status(500).body({ erro: error.message });
     }
   }
 
@@ -73,13 +73,13 @@ class Controllers {
       if (!foiExcluido) {
         return res
           .status(400)
-          .json({ message: 'Não foi possível excluir o registro!' });
+          .json({ message: "Não foi possível excluir o registro!" });
       }
       return res
         .status(200)
-        .json({ message: 'Registro excluído com sucesso!' });
+        .json({ message: "Registro excluído com sucesso!" });
     } catch (error) {
-      // erro
+      return res.status(500).body({ erro: error.message });
     }
   }
 }
