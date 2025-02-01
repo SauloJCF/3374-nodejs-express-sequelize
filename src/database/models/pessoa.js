@@ -1,5 +1,5 @@
-'use strict';
-const { Model } = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Pessoa extends Model {
     /**
@@ -9,37 +9,45 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Pessoa.hasMany(models.Curso, {
-        foreignKey: 'docente_id',
+        foreignKey: "docente_id",
       });
       Pessoa.hasMany(models.Matricula, {
-        foreignKey: 'estudante_id',
-        scope: { status: 'matriculado' },
-        as: 'aulasMatriculadas',
+        foreignKey: "estudante_id",
+        scope: { status: "matriculado" },
+        as: "aulasMatriculadas",
       });
     }
   }
   Pessoa.init(
     {
       nome: DataTypes.STRING,
-      email: DataTypes.STRING,
+      email: { 
+        type: DataTypes.STRING,
+        validate: {
+          isEmail: {
+            args: true,
+            msg: 'Formato do e-mail inválido!'
+          },
+        }
+      },
       cpf: DataTypes.STRING,
       ativo: DataTypes.BOOLEAN,
       role: DataTypes.STRING,
     },
     {
       sequelize,
-      modelName: 'Pessoa',
-      tableName: 'pessoas',
+      modelName: "Pessoa",
+      tableName: "pessoas",
       paranoid: true,
       defaultScope: {
         where: {
-          ativo: true
-        }
+          ativo: true,
+        },
       },
       scopes: {
         todosOsRegistros: {
-          where: {}
-        }
+          where: {},
+        },
       },
     }
   );
