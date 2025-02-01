@@ -10,7 +10,7 @@ class Controllers {
 
       return res.status(200).json(registroCriado);
     } catch (error) {
-      return res.status(500).body({ erro: error.message });
+      return res.status(500).json({ erro: error.message });
     }
   }
 
@@ -25,7 +25,7 @@ class Controllers {
 
       return res.status(200).json(registro);
     } catch (error) {
-      return res.status(500).body({ error: error.message });
+      return res.status(500).json({ error: error.message });
     }
   }
 
@@ -35,7 +35,7 @@ class Controllers {
 
       return res.status(200).json(listaRegistros);
     } catch (error) {
-      return res.status(500).body({ erro: error.message });
+      return res.status(500).json({ erro: error.message });
     }
   }
 
@@ -58,7 +58,7 @@ class Controllers {
         .status(200)
         .json({ message: "Registro atualizado com sucesso!" });
     } catch (error) {
-      return res.status(500).body({ erro: error.message });
+      return res.status(500).json({ erro: error.message });
     }
   }
 
@@ -79,7 +79,7 @@ class Controllers {
         .status(200)
         .json({ message: "Registro excluído com sucesso!" });
     } catch (error) {
-      return res.status(500).body({ erro: error.message });
+      return res.status(500).json({ erro: error.message });
     }
   }
 }
