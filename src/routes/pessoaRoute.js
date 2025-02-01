@@ -7,6 +7,7 @@ const pessoaController = new PessoaController();
 const matriculaController = new MatriculaController();
 
 router.get('/pessoas', (req, res) => pessoaController.pegarTodos(req, res));
+router.get('/pessoas/todos', (req, res) => pessoaController.pegaTodasAsPessoas(req, res));
 router.post('/pessoas', (req, res) => pessoaController.criarRegistro(req, res));
 router.get('/pessoas/:id', (req, res) =>
   pessoaController.pegarPeloId(req, res)

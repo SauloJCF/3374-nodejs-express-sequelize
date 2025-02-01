@@ -14,6 +14,10 @@ class Services {
     return await this.dataSource[this.nomeModelo].findByPk(id);
   }
 
+  async pegarTodosRegistrosPorEscopo(escopo) {
+    return await this.dataSource[this.nomeModelo].scope(escopo).findAll();
+  }
+
   async pegarTodos() {
     return await this.dataSource[this.nomeModelo].findAll();
   }
