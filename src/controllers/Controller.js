@@ -1,3 +1,5 @@
+const converteIds = require('../utils/conversorStringHelper.js');
+
 class Controllers {
   constructor(entidadeService) {
     this.entidadeService = entidadeService;
@@ -29,6 +31,25 @@ class Controllers {
     }
   }
 
+  async pegarUm(req, res) {
+    try {
+      const { ...params } = req.params;
+      const where = converteIds(params);
+      console.log(where);
+      
+      
+      const registro = await this.entidadeService.pegarUm(where);
+
+      if (!registro) {
+        return res.status(400).json({ message: "Registro não encontrado!" });
+      }
+
+      return res.status(200).json(registro);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
   async pegarTodos(req, res) {
     try {
       const listaRegistros = await this.entidadeService.pegarTodos();
@@ -41,12 +62,14 @@ class Controllers {
 
   async atualizarRegistro(req, res) {
     try {
-      const { id } = req.params;
+      const { ...params } = req.params;
+      const where = converteIds(params);
+
       const registroAtualizado = req.body;
 
       const foiAtualizado = await this.entidadeService.atualizarRegistro(
         registroAtualizado,
-        Number(id)
+        where
       );
 
       if (!foiAtualizado) {

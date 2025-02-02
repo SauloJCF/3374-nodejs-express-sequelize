@@ -1,4 +1,4 @@
-const db = require('../database/models');
+const db = require("../database/models");
 
 class Services {
   constructor(nomeModelo) {
@@ -14,6 +14,12 @@ class Services {
     return await this.dataSource[this.nomeModelo].findByPk(id);
   }
 
+  async pegarUm(where) {
+    return await this.dataSource[this.nomeModelo].findOne({
+      where: { ...where },
+    });
+  }
+
   async pegarTodosRegistrosPorEscopo(escopo) {
     return await this.dataSource[this.nomeModelo].scope(escopo).findAll();
   }
@@ -22,10 +28,10 @@ class Services {
     return await this.dataSource[this.nomeModelo].findAll();
   }
 
-  async atualizarRegistro(registroAtualizado, id) {
+  async atualizarRegistro(registroAtualizado, where) {
     const listaRegistrosAtualizados = await this.dataSource[
       this.nomeModelo
-    ].update(registroAtualizado, { where: { id: id } });
+    ].update(registroAtualizado, { where: { ...where } });
 
     return listaRegistrosAtualizados[0] > 0;
   }

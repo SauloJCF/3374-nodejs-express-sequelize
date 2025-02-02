@@ -24,8 +24,18 @@ router.get('/pessoas/:estudanteId/matriculas', (req, res) =>
 router.get('/pessoas/:estudanteId/matriculas/todos', (req, res) =>
   pessoaController.pegarTodasMatriculas(req, res)
 );
-router.post('/pessoas/:estudanteId/matriculas', (req, res) =>
+router.get('/pessoas/:estudante_id/matriculas/:id', (req, res) =>
+  matriculaController.pegarUm(req, res)
+);
+router.post('/pessoas/:estudante_id/matriculas', (req, res) =>
   matriculaController.criarRegistro(req, res)
 );
+router.put('/pessoas/:estudante_id/matriculas/:id', (req, res) =>
+  matriculaController.atualizarRegistro(req, res)
+);
+router.delete('/pessoas/:estudante_id/matriculas/:id', (req, res) =>
+  matriculaController.excluirRegistro(req, res)
+);
+
 
 module.exports = router;
