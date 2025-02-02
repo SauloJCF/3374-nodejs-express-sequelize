@@ -19,7 +19,10 @@ router.delete('/pessoas/:id', (req, res) =>
   pessoaController.excluirRegistro(req, res)
 );
 router.get('/pessoas/:estudanteId/matriculas', (req, res) =>
-  pessoaController.pegarMatriculas(req, res)
+  pessoaController.pegarMatriculasAtivas(req, res)
+);
+router.get('/pessoas/:estudanteId/matriculas/todos', (req, res) =>
+  pessoaController.pegarTodasMatriculas(req, res)
 );
 router.post('/pessoas/:estudanteId/matriculas', (req, res) =>
   matriculaController.criarRegistro(req, res)
