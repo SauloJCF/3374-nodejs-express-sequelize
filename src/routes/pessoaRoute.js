@@ -7,7 +7,9 @@ const pessoaController = new PessoaController();
 const matriculaController = new MatriculaController();
 
 router.get('/pessoas', (req, res) => pessoaController.pegarTodos(req, res));
-router.get('/pessoas/todos', (req, res) => pessoaController.pegaTodasAsPessoas(req, res));
+router.get('/pessoas/todos', (req, res) =>
+  pessoaController.pegaTodasAsPessoas(req, res)
+);
 router.post('/pessoas', (req, res) => pessoaController.criarRegistro(req, res));
 router.get('/pessoas/:id', (req, res) =>
   pessoaController.pegarPeloId(req, res)
@@ -33,9 +35,11 @@ router.post('/pessoas/:estudante_id/matriculas', (req, res) =>
 router.put('/pessoas/:estudante_id/matriculas/:id', (req, res) =>
   matriculaController.atualizarRegistro(req, res)
 );
+router.put('/pessoas/:estudante_id/inativar', (req, res) =>
+  pessoaController.inativarEstudante(req, res)
+);
 router.delete('/pessoas/:estudante_id/matriculas/:id', (req, res) =>
   matriculaController.excluirRegistro(req, res)
 );
-
 
 module.exports = router;
