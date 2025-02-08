@@ -1,4 +1,4 @@
-const db = require("../database/models");
+const db = require('../database/models');
 
 class Services {
   constructor(nomeModelo) {
@@ -28,10 +28,13 @@ class Services {
     return await this.dataSource[this.nomeModelo].findAll();
   }
 
-  async atualizarRegistro(registroAtualizado, where) {
+  async atualizarRegistro(registroAtualizado, where, transacao = {}) {
     const listaRegistrosAtualizados = await this.dataSource[
       this.nomeModelo
-    ].update(registroAtualizado, { where: { ...where } });
+    ].update(registroAtualizado, {
+      where: { ...where },
+      transaction: transacao,
+    });
 
     return listaRegistrosAtualizados[0] > 0;
   }

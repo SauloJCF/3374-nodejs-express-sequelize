@@ -1,4 +1,5 @@
 const Services = require('./Services.js');
+const dataSource = require('../database/models');
 
 class PessoaServices extends Services {
   constructor() {
@@ -23,12 +24,19 @@ class PessoaServices extends Services {
   }
 
   async inativarEstudante(estudanteId) {
-    await super.atualizarRegistro({ ativo: false }, { id: estudanteId });
+    return dataSource.sequelize.transaction(async (transacao) => {
+      await super.atualizarRegistro(
+        { ativo: false },
+        { id: estudanteId },
+        transacao
+      );
 
-    await this.matriculaService.atualizarRegistro(
-      { status: 'cancelado' },
-      { estudante_id: estudanteId }
-    );
+      await this.matriculaService.atualizarRegistro(
+        { status: 'cancelado' },
+        { estudante_id: estudanteId },
+        transacao
+      );
+    });
   }
 }
 
